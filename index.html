@@ -30,6 +30,14 @@
             justify-content: center;
             position: relative;
             padding: 0;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Prevent horizontal scrolling */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
+            position: relative;
         }
 
         /* Animated background elements */
@@ -51,6 +59,7 @@
             position: relative;
             z-index: 2;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         /* Page Styles */
@@ -606,6 +615,9 @@
             position: absolute;
             pointer-events: none;
             z-index: 1;
+            will-change: transform;
+            backface-visibility: hidden;
+            transform: translateZ(0);
         }
 
         .rose {
@@ -654,6 +666,8 @@
             .btn {
                 padding: 15px 30px;
                 font-size: 1.1rem;
+                min-height: 44px;
+                min-width: 44px;
             }
             
             .letter {
@@ -683,11 +697,20 @@
                 font-size: 1.5rem;
                 top: 20px;
                 right: 20px;
+                min-height: 44px;
+                min-width: 44px;
             }
             
             .progress {
                 bottom: 20px;
                 padding: 10px 20px;
+            }
+            
+            .progress-dot {
+                width: 16px;
+                height: 16px;
+                min-height: 16px;
+                min-width: 16px;
             }
             
             .btn-container {
@@ -705,6 +728,135 @@
             #page3 .proposal-container {
                 padding: 40px 20px;
             }
+            
+            /* Fix scrolling for longer pages */
+            .page {
+                min-height: auto;
+                padding: 40px 20px;
+                justify-content: flex-start;
+                display: none;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .page.active {
+                display: flex;
+            }
+            
+            /* Specific adjustments for each long page */
+            #page4, #page5, #page6, #page7, #page8 {
+                min-height: 100vh;
+                height: auto;
+                overflow-y: auto;
+                padding-top: 60px;
+                padding-bottom: 100px;
+            }
+            
+            /* Video page adjustments */
+            #page4 .video-container {
+                margin: 20px auto;
+                transform: perspective(1000px) rotateX(0deg);
+            }
+            
+            #page4 .video-wrapper {
+                margin-bottom: 20px;
+            }
+            
+            /* Dancing page adjustments */
+            #page5 .dance-container {
+                width: 280px;
+                height: 280px;
+                margin: 20px auto;
+            }
+            
+            #page5 .emoji {
+                font-size: 4.5rem;
+            }
+            
+            /* Kiss page adjustments */
+            #page6 .kiss-container {
+                width: 250px;
+                height: 250px;
+                margin: 20px auto;
+            }
+            
+            #page6 .kiss-emoji {
+                font-size: 6rem;
+            }
+            
+            /* Thank you page adjustments */
+            #page7 .thank-you {
+                font-size: 2.8rem;
+                margin: 20px 0;
+            }
+            
+            #page7 p {
+                font-size: 1.2rem;
+                margin-bottom: 25px;
+            }
+            
+            /* Gift page adjustments */
+            #page8 .gift-container {
+                padding: 30px 20px;
+                margin: 20px auto;
+            }
+            
+            .gift-instruction {
+                padding: 15px;
+                margin: 15px 0;
+            }
+            
+            /* Adjust button positioning */
+            .btn {
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+            
+            /* Fix container height */
+            .container {
+                min-height: auto;
+                height: auto;
+            }
+            
+            /* Reduce animation intensity on mobile */
+            .bg-hearts, .bg-sparkles {
+                animation-duration: 12s;
+            }
+            
+            /* Add breathing room between elements */
+            .page > * {
+                margin-bottom: 25px;
+            }
+            
+            /* Reduce margins in letter */
+            .letter-content p {
+                margin-bottom: 20px;
+            }
+            
+            /* Adjust signature */
+            .signature {
+                margin-top: 30px;
+                font-size: 2rem;
+            }
+            
+            /* Adjust content spacing */
+            #page4 p, #page5 p, #page6 p, #page7 p, #page8 p {
+                margin-bottom: 20px;
+            }
+            
+            /* Dancing page text */
+            #page5 .dance-container {
+                margin: 15px auto;
+            }
+            
+            /* Fix for iOS Safari 100vh issue */
+            .page {
+                min-height: -webkit-fill-available;
+            }
+            
+            #page4, #page5, #page6, #page7, #page8 {
+                min-height: -webkit-fill-available;
+            }
         }
 
         @media (max-width: 480px) {
@@ -717,12 +869,68 @@
             }
             
             .dance-container {
-                width: 250px;
-                height: 250px;
+                width: 220px;
+                height: 220px;
             }
             
             .emoji {
-                font-size: 3rem;
+                font-size: 3.5rem;
+            }
+            
+            #page5 .dance-container {
+                width: 220px;
+                height: 220px;
+            }
+            
+            #page5 .emoji {
+                font-size: 3.5rem;
+            }
+            
+            #page6 .kiss-container {
+                width: 200px;
+                height: 200px;
+            }
+            
+            #page6 .kiss-emoji {
+                font-size: 5rem;
+            }
+            
+            #page7 .thank-you {
+                font-size: 2.2rem;
+            }
+            
+            .letter-content {
+                font-size: 1.2rem;
+            }
+            
+            .signature {
+                font-size: 2rem;
+            }
+            
+            /* Ensure text doesn't overflow */
+            .letter {
+                padding: 25px 15px;
+                word-wrap: break-word;
+            }
+            
+            /* Adjust proposal container */
+            #page3 .proposal-container {
+                padding: 30px 15px;
+            }
+            
+            /* Fix button container */
+            .btn-container {
+                gap: 15px;
+                margin-top: 30px;
+            }
+            
+            .btn {
+                padding: 15px 25px;
+                font-size: 1.1rem;
+            }
+            
+            #page4, #page5, #page6, #page7, #page8 {
+                padding: 50px 15px 80px;
             }
         }
     </style>
@@ -981,7 +1189,26 @@
             
             // Add click event to start music
             document.body.addEventListener('click', initMusic, { once: true });
+            
+            // Setup mobile scrolling
+            setupMobileScrolling();
         });
+        
+        // Mobile scroll handling
+        function setupMobileScrolling() {
+            if (window.innerWidth <= 768) {
+                // Make all pages scrollable
+                document.querySelectorAll('.page').forEach(page => {
+                    page.style.overflowY = 'auto';
+                    page.style.WebkitOverflowScrolling = 'touch';
+                });
+                
+                // Adjust page heights for mobile
+                document.querySelectorAll('#page4, #page5, #page6, #page7, #page8').forEach(page => {
+                    page.style.minHeight = 'calc(100vh - 80px)';
+                });
+            }
+        }
         
         // Page navigation functions
         function nextPage() {
@@ -1013,6 +1240,11 @@
                 });
                 
                 currentPage = pageIndex;
+                
+                // Scroll to top on mobile when changing pages
+                if (window.innerWidth <= 768) {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
                 
                 // Special effects for specific pages
                 if (pageIndex === 2) { // Proposal page
@@ -1451,6 +1683,9 @@
         
         // Call preload after page loads
         window.addEventListener('load', preloadAudio);
+        
+        // Recalculate on resize for responsive design
+        window.addEventListener('resize', setupMobileScrolling);
     </script>
 </body>
 </html>
